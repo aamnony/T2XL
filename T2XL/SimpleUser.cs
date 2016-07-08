@@ -42,6 +42,13 @@ namespace T2XL
                 Phone = u.phone;
                 Self = true;
             }
+            else if (t == typeof(UserForeignConstructor))
+            {
+                var u = ((UserForeignConstructor)user);
+                Id = u.id;
+                Name = u.first_name + (String.IsNullOrWhiteSpace(u.last_name) ? String.Empty : ' ' + u.last_name);
+                Phone = String.Empty;
+            }
             else
             {
                 throw new ArgumentException(String.Format("User type '{0}' is not supported", user.Constructor));
