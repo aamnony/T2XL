@@ -27,12 +27,12 @@ namespace T2XL
         public SimpleUser(User user)
         {
             Type t = user.GetType();
-            if (t == typeof(UserContactConstructor))
+            if (t == typeof(UserEmptyConstructor))
             {
-                var u = ((UserContactConstructor)user);
+                var u = ((UserEmptyConstructor)user);
                 Id = u.id;
-                Name = u.first_name + (String.IsNullOrWhiteSpace(u.last_name) ? String.Empty : ' ' + u.last_name);
-                Phone = u.phone;
+                Name = String.Empty;
+                Phone = String.Empty;
             }
             else if (t == typeof(UserSelfConstructor))
             {
@@ -42,9 +42,30 @@ namespace T2XL
                 Phone = u.phone;
                 Self = true;
             }
+            else if (t == typeof(UserContactConstructor))
+            {
+                var u = ((UserContactConstructor)user);
+                Id = u.id;
+                Name = u.first_name + (String.IsNullOrWhiteSpace(u.last_name) ? String.Empty : ' ' + u.last_name);
+                Phone = u.phone;
+            }
+            else if (t == typeof(UserRequestConstructor))
+            {
+                var u = ((UserRequestConstructor)user);
+                Id = u.id;
+                Name = u.first_name + (String.IsNullOrWhiteSpace(u.last_name) ? String.Empty : ' ' + u.last_name);
+                Phone = u.phone;
+            }
             else if (t == typeof(UserForeignConstructor))
             {
                 var u = ((UserForeignConstructor)user);
+                Id = u.id;
+                Name = u.first_name + (String.IsNullOrWhiteSpace(u.last_name) ? String.Empty : ' ' + u.last_name);
+                Phone = String.Empty;
+            }
+            else if (t == typeof(UserDeletedConstructor))
+            {
+                var u = ((UserDeletedConstructor)user);
                 Id = u.id;
                 Name = u.first_name + (String.IsNullOrWhiteSpace(u.last_name) ? String.Empty : ' ' + u.last_name);
                 Phone = String.Empty;
